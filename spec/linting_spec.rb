@@ -1,2 +1,2 @@
-require 'rails_helper'
-FactoryGirl.lint
+# require 'rails_helper'
+# FactoryGirl.lint
