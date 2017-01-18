@@ -8,6 +8,8 @@ RSpec.describe Business, type: :model do
     it { is_expected.to belong_to :enterprise_scale }
     it { is_expected.to have_many :addresses }
     it { is_expected.to have_many :gross_sales }
+    it { is_expected.to have_many :business_activities }
+    it { is_expected.to have_many :line_of_businesses }
   end
 
   describe "validations" do

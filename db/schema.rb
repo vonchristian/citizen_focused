@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118052158) do
+ActiveRecord::Schema.define(version: 20170118052831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(version: 20170118052158) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.index ["subscriber_id"], name: "index_barangays_on_subscriber_id", using: :btree
+  end
+
+  create_table "business_activities", force: :cascade do |t|
+    t.integer  "business_id"
+    t.integer  "line_of_business_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["business_id"], name: "index_business_activities_on_business_id", using: :btree
+    t.index ["line_of_business_id"], name: "index_business_activities_on_line_of_business_id", using: :btree
   end
 
   create_table "businesses", force: :cascade do |t|
@@ -187,6 +196,8 @@ ActiveRecord::Schema.define(version: 20170118052158) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "business_activities", "businesses"
+  add_foreign_key "business_activities", "line_of_businesses"
   add_foreign_key "businesses", "enterprise_scales"
   add_foreign_key "businesses", "taxpayers"
   add_foreign_key "businesses", "type_of_organizations"

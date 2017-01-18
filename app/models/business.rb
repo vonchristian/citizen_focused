@@ -5,6 +5,9 @@ class Business < ApplicationRecord
   belongs_to :enterprise_scale
   has_many :addresses, as: :addressable
   has_many :gross_sales, class_name: "Businesses::GrossSale"
+  has_many :business_activities, class_name: "Businesses::BusinessActivity"
+  has_many :line_of_businesses, through: :business_activities
+
 
   after_commit :set_enterprise_scale
 
