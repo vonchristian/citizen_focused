@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118032049) do
+ActiveRecord::Schema.define(version: 20170118033357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,16 @@ ActiveRecord::Schema.define(version: 20170118032049) do
     t.index ["commercial_document_id"], name: "index_entries_on_commercial_document_id", using: :btree
     t.index ["commercial_document_type"], name: "index_entries_on_commercial_document_type", using: :btree
     t.index ["recorder_id"], name: "index_entries_on_recorder_id", using: :btree
+  end
+
+  create_table "gross_sales", force: :cascade do |t|
+    t.date     "year"
+    t.decimal  "amount"
+    t.decimal  "tax"
+    t.integer  "business_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["business_id"], name: "index_gross_sales_on_business_id", using: :btree
   end
 
   create_table "provinces", force: :cascade do |t|
