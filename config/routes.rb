@@ -3,10 +3,11 @@ Rails.application.routes.draw do
   resources :taxpayers
   resources :system_configurations, only: [:index]
   namespace :system_configurations do
+    resources :retailer_gross_sale_minimums, only: [:new, :create]
     resources :line_of_businesses do
       resources :gross_sale_taxes
       resources :business_taxes
-      resources :percentage_taxes 
+      resources :percentage_taxes
     end
   end
 end
