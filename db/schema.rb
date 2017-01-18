@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118004915) do
+ActiveRecord::Schema.define(version: 20170118013615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 20170118004915) do
     t.index ["entry_id", "account_id"], name: "index_amounts_on_entry_id_and_account_id", using: :btree
     t.index ["entry_id"], name: "index_amounts_on_entry_id", using: :btree
     t.index ["type"], name: "index_amounts_on_type", using: :btree
+  end
+
+  create_table "businesses", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "taxpayer_id"
+    t.decimal  "asset_size"
+    t.boolean  "renting"
+    t.integer  "employee_count"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["taxpayer_id"], name: "index_businesses_on_taxpayer_id", using: :btree
   end
 
   create_table "entries", force: :cascade do |t|
@@ -89,4 +100,5 @@ ActiveRecord::Schema.define(version: 20170118004915) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "businesses", "taxpayers"
 end
