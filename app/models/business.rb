@@ -6,7 +6,14 @@ class Business < ApplicationRecord
   has_many :addresses, as: :addressable
   has_many :gross_sales, class_name: "Businesses::GrossSale"
 
+  after_commit :set_enterprise_scale
+
   validates :name, presence: true
   validates :employee_count, presence: true, numericality: { greater_than_or_equal_to: 1 }
   validates :asset_size, presence: true
+
+  private
+  def set_enterprise_scale
+    EnterpriseScale.set_enterprise_scale(self)
+  end
 end

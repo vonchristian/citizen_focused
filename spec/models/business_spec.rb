@@ -17,6 +17,10 @@ RSpec.describe Business, type: :model do
     it do
       is_expected.to validate_numericality_of(:employee_count).is_greater_than_or_equal_to(1)
     end
-
+  end
+  it "set_enterprise_scale" do
+    enterprise_scale = create(:enterprise_scale, minimum: 100, maximum: 1_000)
+    business = create(:business, asset_size: 100)
+    expect(business.enterprise_scale).to eql(enterprise_scale)
   end
 end
