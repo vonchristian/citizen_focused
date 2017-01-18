@@ -1,6 +1,6 @@
 shared_examples_for 'a Fee subtype' do |elements|
   let(:fee) { create(elements[:kind])}
-  subject { feer }
+  subject { fee }
 
   it "requires a name" do
     fee.name = nil

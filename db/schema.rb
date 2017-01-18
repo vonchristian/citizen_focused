@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118053647) do
+ActiveRecord::Schema.define(version: 20170118060917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,6 +165,20 @@ ActiveRecord::Schema.define(version: 20170118053647) do
     t.string   "type"
     t.index ["province_id"], name: "index_subscribers_on_province_id", using: :btree
     t.index ["type"], name: "index_subscribers_on_type", using: :btree
+  end
+
+  create_table "taxes", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "taxable_id"
+    t.string   "taxable_type"
+    t.integer  "tax_type"
+    t.decimal  "tax_amount"
+    t.decimal  "tax_percentage"
+    t.boolean  "default",        default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["taxable_id"], name: "index_taxes_on_taxable_id", using: :btree
+    t.index ["taxable_type"], name: "index_taxes_on_taxable_type", using: :btree
   end
 
   create_table "taxpayers", force: :cascade do |t|
