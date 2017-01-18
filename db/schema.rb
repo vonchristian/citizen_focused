@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118020143) do
+ActiveRecord::Schema.define(version: 20170118021258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,9 +44,11 @@ ActiveRecord::Schema.define(version: 20170118020143) do
     t.decimal  "asset_size"
     t.boolean  "renting"
     t.integer  "employee_count"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "type_of_organization_id"
     t.index ["taxpayer_id"], name: "index_businesses_on_taxpayer_id", using: :btree
+    t.index ["type_of_organization_id"], name: "index_businesses_on_type_of_organization_id", using: :btree
   end
 
   create_table "entries", force: :cascade do |t|
@@ -107,4 +109,5 @@ ActiveRecord::Schema.define(version: 20170118020143) do
   end
 
   add_foreign_key "businesses", "taxpayers"
+  add_foreign_key "businesses", "type_of_organizations"
 end

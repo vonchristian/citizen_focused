@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Business, type: :model do
   describe "associations" do
     it { is_expected.to belong_to :taxpayer }
+    it { is_expected.to belong_to :type_of_organization }    
   end
 
   describe "validations" do
