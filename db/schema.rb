@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118052831) do
+ActiveRecord::Schema.define(version: 20170118053647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,20 @@ ActiveRecord::Schema.define(version: 20170118052831) do
     t.index ["commercial_document_id"], name: "index_entries_on_commercial_document_id", using: :btree
     t.index ["commercial_document_type"], name: "index_entries_on_commercial_document_type", using: :btree
     t.index ["recorder_id"], name: "index_entries_on_recorder_id", using: :btree
+  end
+
+  create_table "fees", force: :cascade do |t|
+    t.string   "type"
+    t.string   "name"
+    t.decimal  "amount"
+    t.integer  "feeable_id"
+    t.string   "feeable_type"
+    t.boolean  "default",      default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["feeable_id"], name: "index_fees_on_feeable_id", using: :btree
+    t.index ["feeable_type"], name: "index_fees_on_feeable_type", using: :btree
+    t.index ["type"], name: "index_fees_on_type", using: :btree
   end
 
   create_table "gross_sales", force: :cascade do |t|
