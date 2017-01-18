@@ -7,4 +7,4 @@ module Businesses
       it { is_expected.to belong_to :line_of_business }
     end
   end
-end 
+end
