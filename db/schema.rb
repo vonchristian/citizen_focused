@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170117150037) do
+ActiveRecord::Schema.define(version: 20170118004915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,19 @@ ActiveRecord::Schema.define(version: 20170117150037) do
     t.index ["commercial_document_id"], name: "index_entries_on_commercial_document_id", using: :btree
     t.index ["commercial_document_type"], name: "index_entries_on_commercial_document_type", using: :btree
     t.index ["recorder_id"], name: "index_entries_on_recorder_id", using: :btree
+  end
+
+  create_table "taxpayers", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "full_name"
+    t.integer  "sex",              default: 0
+    t.date     "date_of_birth"
+    t.string   "mobile_number"
+    t.string   "telephone_number"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "users", force: :cascade do |t|
