@@ -9,6 +9,7 @@ class LineOfBusiness < ApplicationRecord
 
 
   validates :name, presence: true, uniqueness: true
+  validates :line_of_business_tax_config_id, presence: true
 
   accepts_nested_attributes_for :mayors_permit_fee
 

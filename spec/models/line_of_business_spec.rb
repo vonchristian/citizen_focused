@@ -11,6 +11,8 @@ RSpec.describe LineOfBusiness, type: :model do
 
   describe "validations" do
     it { is_expected.to validate_presence_of :name }
+    it { is_expected.to validate_presence_of :line_of_business_tax_config_id }
+
     it { is_expected.to validate_uniqueness_of :name }
   end
 
