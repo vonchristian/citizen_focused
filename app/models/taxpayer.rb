@@ -1,7 +1,8 @@
 class Taxpayer < ApplicationRecord
 
   has_many :businesses
-  
+  has_many :addresses, as: :addressable
+
   validates :first_name, :middle_name, :last_name, presence: true
   validates :full_name, uniqueness: true
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118021258) do
+ActiveRecord::Schema.define(version: 20170118021947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,19 @@ ActiveRecord::Schema.define(version: 20170118021258) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.index ["type"], name: "index_accounts_on_type", using: :btree
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.string   "house_or_building_number"
+    t.string   "building_name"
+    t.string   "unit_number"
+    t.string   "subdivision"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["addressable_id"], name: "index_addresses_on_addressable_id", using: :btree
+    t.index ["addressable_type"], name: "index_addresses_on_addressable_type", using: :btree
   end
 
   create_table "amounts", force: :cascade do |t|
@@ -36,6 +49,14 @@ ActiveRecord::Schema.define(version: 20170118021258) do
     t.index ["entry_id", "account_id"], name: "index_amounts_on_entry_id_and_account_id", using: :btree
     t.index ["entry_id"], name: "index_amounts_on_entry_id", using: :btree
     t.index ["type"], name: "index_amounts_on_type", using: :btree
+  end
+
+  create_table "barangays", force: :cascade do |t|
+    t.string   "name",          default: "", null: false
+    t.integer  "subscriber_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["subscriber_id"], name: "index_barangays_on_subscriber_id", using: :btree
   end
 
   create_table "businesses", force: :cascade do |t|
@@ -63,6 +84,20 @@ ActiveRecord::Schema.define(version: 20170118021258) do
     t.index ["commercial_document_id"], name: "index_entries_on_commercial_document_id", using: :btree
     t.index ["commercial_document_type"], name: "index_entries_on_commercial_document_type", using: :btree
     t.index ["recorder_id"], name: "index_entries_on_recorder_id", using: :btree
+  end
+
+  create_table "provinces", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subscribers", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "province_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["province_id"], name: "index_subscribers_on_province_id", using: :btree
   end
 
   create_table "taxpayers", force: :cascade do |t|
@@ -110,4 +145,5 @@ ActiveRecord::Schema.define(version: 20170118021258) do
 
   add_foreign_key "businesses", "taxpayers"
   add_foreign_key "businesses", "type_of_organizations"
+  add_foreign_key "subscribers", "provinces"
 end
