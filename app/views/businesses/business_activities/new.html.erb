@@ -1,0 +1,9 @@
+<% @line_of_businesses.each do |line_of_business| %>
+  <%=line_of_business.name %>
+  <%=simple_form_for [@business, @business_activity], url: :business_business_activities do |f| %>
+    <%= f.error_notification %>
+    <%=f.input :line_of_business_id, input_html: { value: line_of_business.id }, as: :hidden %>
+    <%=f.submit "Add" %>
+  <% end %>
+<% end %>
+<%=link_to "Back to Business", business_path(@business) %>

@@ -1,0 +1,6 @@
+<%=link_to "Add Business Activity", new_business_business_activity_path(@business) %>
+<% @business.business_activities.each do |business_activity| %>
+<p><%=business_activity.line_of_business_name %>
+<%=link_to "Add Gross Sale", new_business_activity_gross_sale_path(business_activity) %>
+</p>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118100812) do
+ActiveRecord::Schema.define(version: 20170118111635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,10 +131,10 @@ ActiveRecord::Schema.define(version: 20170118100812) do
     t.date     "year"
     t.decimal  "amount"
     t.decimal  "tax"
-    t.integer  "business_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["business_id"], name: "index_gross_sales_on_business_id", using: :btree
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "business_activity_id"
+    t.index ["business_activity_id"], name: "index_gross_sales_on_business_activity_id", using: :btree
   end
 
   create_table "line_of_business_categories", force: :cascade do |t|
@@ -248,6 +248,7 @@ ActiveRecord::Schema.define(version: 20170118100812) do
   add_foreign_key "businesses", "taxpayers"
   add_foreign_key "businesses", "type_of_organizations"
   add_foreign_key "capitals", "businesses"
+  add_foreign_key "gross_sales", "business_activities"
   add_foreign_key "line_of_businesses", "line_of_business_categories"
   add_foreign_key "line_of_businesses", "line_of_business_tax_configs"
   add_foreign_key "subscribers", "provinces"

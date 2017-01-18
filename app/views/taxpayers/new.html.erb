@@ -1,0 +1,11 @@
+<%=simple_form_for @taxpayer do |f| %>
+  <%=f.error_notification %>
+  <%= f.input :first_name %>
+  <%= f.input :middle_name %>
+  <%= f.input :last_name %>
+  <%= f.input :sex %>
+  <%=f.input :date_of_birth %>
+  <%=f.input :mobile_number %>
+  <%=f.input :telephone_number %>
+  <%= f.submit %>
+<% end %>  

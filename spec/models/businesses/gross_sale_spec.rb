@@ -3,7 +3,7 @@ require 'rails_helper'
 module Businesses
   describe GrossSale do
     describe "associations" do
-      it { is_expected.to belong_to :business }
+      it { is_expected.to belong_to :business_activity }
     end
     describe "validations" do
       it { is_expected.to validate_presence_of :amount }

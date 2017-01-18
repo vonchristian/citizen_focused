@@ -1,0 +1,7 @@
+<%=simple_form_for [@taxpayer, @business] do |f| %>
+  <%=f.error_notification %>
+  <%= f.input :name %>
+  <%= f.input :employee_count %>
+  <%= f.input :asset_size %>
+  <%= f.submit %>
+<% end %>

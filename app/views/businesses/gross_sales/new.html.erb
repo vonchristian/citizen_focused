@@ -1,0 +1,7 @@
+
+  <%=simple_form_for [@business_activity, @gross_sale], url: :business_activity_gross_sales do |f| %>
+    <%= f.error_notification %>
+    <%=f.input :amount %>
+    <%=f.input :year %>
+    <%=f.submit %>
+  <% end %>

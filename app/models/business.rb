@@ -14,7 +14,9 @@ class Business < ApplicationRecord
   validates :name, presence: true
   validates :employee_count, presence: true, numericality: { greater_than_or_equal_to: 1 }
   validates :asset_size, presence: true
-
+  def retailer?
+    true
+  end
   private
   def set_enterprise_scale
     EnterpriseScale.set_enterprise_scale(self)
