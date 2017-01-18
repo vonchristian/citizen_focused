@@ -1,2 +1,11 @@
 <%=@line_of_business.name %>
+<% if @line_of_business.is_gross_sales_based? %>
 <%=link_to "New Gross Sale Tax", new_system_configurations_line_of_business_gross_sale_tax_path(@line_of_business) %>
+<% elsif @line_of_business.is_amount_based? %>
+<%=link_to "New Tax (amount)", new_system_configurations_line_of_business_business_tax_path(@line_of_business) %>
+<% elsif @line_of_business.is_percentage_based? %>
+<%=link_to "New Tax (Percentage)", new_system_configurations_line_of_business_percentage_tax_path(@line_of_business) %>
+<% end %>
+<% if @line_of_business.is_amount_based? %>
+<%=@line_of_business.business_taxes.last.tax_amount %>
+<% end %>

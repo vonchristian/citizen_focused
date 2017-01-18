@@ -1,6 +1,7 @@
 <%=simple_form_for @line_of_business, url: :system_configurations_line_of_businesses do |f| %>
   <%=f.error_notification %>
   <%= f.input :name %>
-    
+  <%=f.input :line_of_business_tax_config_id, collection: LineOfBusinessTaxConfig.all.map{|a| [a.name, a.id]} %>
+
   <%= f.submit %>
 <% end %>

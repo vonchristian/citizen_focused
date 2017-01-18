@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   namespace :system_configurations do
     resources :line_of_businesses do
       resources :gross_sale_taxes
+      resources :business_taxes
+      resources :percentage_taxes 
     end
   end
 end

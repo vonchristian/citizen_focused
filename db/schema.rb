@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118074922) do
+ActiveRecord::Schema.define(version: 20170118095157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,12 +143,21 @@ ActiveRecord::Schema.define(version: 20170118074922) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "line_of_business_tax_configs", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "line_of_businesses", force: :cascade do |t|
     t.string   "name"
     t.integer  "line_of_business_category_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "line_of_business_tax_config_id"
+    t.text     "description"
     t.index ["line_of_business_category_id"], name: "index_line_of_businesses_on_line_of_business_category_id", using: :btree
+    t.index ["line_of_business_tax_config_id"], name: "index_line_of_businesses_on_line_of_business_tax_config_id", using: :btree
   end
 
   create_table "provinces", force: :cascade do |t|
@@ -174,11 +183,12 @@ ActiveRecord::Schema.define(version: 20170118074922) do
     t.integer  "tax_type"
     t.decimal  "tax_amount"
     t.decimal  "tax_percentage"
-    t.boolean  "default",        default: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.boolean  "default",               default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.decimal  "min_gross_sale"
     t.decimal  "max_gross_sale"
+    t.decimal  "gross_sale_percentage"
     t.index ["taxable_id"], name: "index_taxes_on_taxable_id", using: :btree
     t.index ["taxable_type"], name: "index_taxes_on_taxable_type", using: :btree
   end
@@ -233,5 +243,6 @@ ActiveRecord::Schema.define(version: 20170118074922) do
   add_foreign_key "businesses", "type_of_organizations"
   add_foreign_key "capitals", "businesses"
   add_foreign_key "line_of_businesses", "line_of_business_categories"
+  add_foreign_key "line_of_businesses", "line_of_business_tax_configs"
   add_foreign_key "subscribers", "provinces"
 end

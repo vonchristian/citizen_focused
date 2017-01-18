@@ -19,10 +19,10 @@ module SystemConfigurations
     def show
       @line_of_business = LineOfBusiness.find(params[:id])
     end
-    
+
     private
     def line_of_business_params
-      params.require(:line_of_business).permit(:name)
+      params.require(:line_of_business).permit(:name, :line_of_business_tax_config_id)
     end
   end
 end

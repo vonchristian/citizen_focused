@@ -1,0 +1,7 @@
+<%=simple_form_for [@line_of_business, @percentage_tax], url: :system_configurations_line_of_business_percentage_taxes do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :tax_percentage %>
+  <%= f.input :gross_sale_percentage %>
+
+  <%= f.submit %>
+<% end %>

@@ -1,10 +1,16 @@
 class LineOfBusiness < ApplicationRecord
   has_one :mayors_permit_fee, as: :feeable, class_name: "Fees::MayorsPermitFee"
-  has_one :business_tax, as: :taxable, class_name: "Taxes::BusinessTax"
   belongs_to :line_of_business_category
-  has_many :gross_sale_taxes, class_name: "Taxes::GrossSaleTax", foreign_key: 'taxable_id'
+  belongs_to :line_of_business_tax_config
+  has_many :gross_sale_taxes, as: :taxable, class_name: "Taxes::GrossSaleTax"
+  has_many :percentage_taxes, as: :taxable, class_name: "Taxes::PercentageTax"
+  has_many :business_taxes, as: :taxable, class_name: "Taxes::BusinessTax"
+
+
 
   validates :name, presence: true, uniqueness: true
 
-  accepts_nested_attributes_for :mayors_permit_fee, :business_tax
+  accepts_nested_attributes_for :mayors_permit_fee
+
+  delegate :is_amount_based?, :is_percentage_based?, :is_gross_sales_based?, to: :line_of_business_tax_config, allow_nil: true
 end

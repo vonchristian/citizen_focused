@@ -1,0 +1,5 @@
+<%=simple_form_for [@line_of_business, @business_tax], url: :system_configurations_line_of_business_business_taxes do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :tax_amount %>
+  <%= f.submit "Save Tax" %>
+<% end %>
