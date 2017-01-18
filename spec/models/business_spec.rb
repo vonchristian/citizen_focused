@@ -5,6 +5,7 @@ RSpec.describe Business, type: :model do
     it { is_expected.to have_one :capital }
     it { is_expected.to belong_to :taxpayer }
     it { is_expected.to belong_to :type_of_organization }
+    it { is_expected.to belong_to :enterprise_scale }
     it { is_expected.to have_many :addresses }
     it { is_expected.to have_many :gross_sales }
   end
