@@ -12,4 +12,8 @@ RSpec.describe LineOfBusiness, type: :model do
     it { is_expected.to validate_uniqueness_of :name }
   end
 
+  describe "nested_attributes" do
+    it { is_expected.to accept_nested_attributes_for(:mayors_permit_fee) }
+  end
+
 end
