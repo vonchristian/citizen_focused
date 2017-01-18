@@ -1,0 +1,7 @@
+<%=simple_form_for [@line_of_business, @gross_sale_tax], url: :system_configurations_line_of_business_gross_sale_taxes do |f| %>
+  <%= f.error_notification %>
+  <%=f.input :min_gross_sale %>
+  <%=f.input :max_gross_sale %>
+  <%= f.input :tax_amount %>
+  <%= f.submit %>
+<% end %>

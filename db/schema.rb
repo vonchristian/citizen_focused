@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118060917) do
+ActiveRecord::Schema.define(version: 20170118074922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,6 +177,8 @@ ActiveRecord::Schema.define(version: 20170118060917) do
     t.boolean  "default",        default: false
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.decimal  "min_gross_sale"
+    t.decimal  "max_gross_sale"
     t.index ["taxable_id"], name: "index_taxes_on_taxable_id", using: :btree
     t.index ["taxable_type"], name: "index_taxes_on_taxable_type", using: :btree
   end

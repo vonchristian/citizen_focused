@@ -1,0 +1,6 @@
+<%=simple_form_for @line_of_business, url: :system_configurations_line_of_businesses do |f| %>
+  <%=f.error_notification %>
+  <%= f.input :name %>
+    
+  <%= f.submit %>
+<% end %>

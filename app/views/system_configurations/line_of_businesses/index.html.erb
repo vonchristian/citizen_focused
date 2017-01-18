@@ -1,0 +1,5 @@
+<%=link_to "New Line of Business", new_system_configurations_line_of_business_path, class: "btn btn-danger btn-flat" %>
+
+<% @line_of_businesses.each do |line_of_business| %>
+  <%=link_to line_of_business.name, system_configurations_line_of_business_path(line_of_business) %>
+<% end %>
