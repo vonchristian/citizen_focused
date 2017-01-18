@@ -1,6 +1,13 @@
 require 'rails_helper'
 
-describe Accounting::Amount do 
-  describe "validations" do
+module Accounting
+  describe Amount do
+    describe "validations" do
+    end
+
+    describe Amount do
+      subject { FactoryGirl.build(:amount) }
+      it { should_not be_valid }  # construct a child class instead
+    end
   end
 end
