@@ -2,15 +2,16 @@ module Businesses
   class GrossSale < ApplicationRecord
     belongs_to :business_activity
     validates :amount, presence: true, numericality: true
-    validate :minimum_amount_for_retailers
-    delegate :retailer?, to: :business_activity, allow_nil: true
+    validates :amount, numericality: { greater_than_or_equal_to: Configurations::RetailerGrossSaleMinimum.last.amount}, if:  Proc.new{|u| u.retailer? }
+    # validate :minimum_amount_for_retailers
+    delegate :retailer?, to: :business_activity
     after_commit :set_tax
     delegate :line_of_business, to: :business_activity
     delegate :is_amount_based?, :is_percentage_based?, :is_gross_sales_based?, to: :line_of_business
     private
-    def minimum_amount_for_retailers
-      errors[:amount] << "Amount must be at least #{Configurations::RetailerGrossSaleMinimum.last.amount}" if self.retailer? && self.amount < Configurations::RetailerGrossSaleMinimum.last.amount
-    end
+    # def minimum_amount_for_retailers
+    #   errors[:amount] << "Amount must be at least #{Configurations::RetailerGrossSaleMinimum.last.amount}" if self.retailer? && self.amount < Configurations::RetailerGrossSaleMinimum.last.amount
+    # end
 
     def set_tax
       if self.is_amount_based?

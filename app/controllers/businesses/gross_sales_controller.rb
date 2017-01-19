@@ -16,7 +16,7 @@ module Businesses
 
     private
     def gross_sale_params
-      params.require(:businesses_gross_sale).permit(:year, :amount, :business_activity_id)
+      params.require(:businesses_gross_sale).permit(:year, :amount)
     end
   end
 end

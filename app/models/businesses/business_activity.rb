@@ -5,6 +5,6 @@ module Businesses
     has_many :gross_sales, class_name: "Businesses::GrossSale"
 
     delegate :name, to: :line_of_business, prefix: true, allow_nil: true
-    delegate :retailer?, to: :business, allow_nil: true
+    delegate :retailer?, to: :line_of_business, allow_nil: true
   end
 end

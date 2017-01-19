@@ -12,4 +12,8 @@ class LineOfBusiness < ApplicationRecord
   accepts_nested_attributes_for :mayors_permit_fee
 
   delegate :is_amount_based?, :is_percentage_based?, :is_gross_sales_based?, to: :line_of_business_tax_config, allow_nil: true
+
+  def retailer?
+    name == "Retailers"
+  end
 end
