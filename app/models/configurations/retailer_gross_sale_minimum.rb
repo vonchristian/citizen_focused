@@ -3,7 +3,7 @@ module Configurations
     validates :amount, presence: true, numericality: true
 
     def self.default_amount
-      all.last.amount || 0
+      all.last.try(:amount) || 0
     end
   end
 end
