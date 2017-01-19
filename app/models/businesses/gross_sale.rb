@@ -2,7 +2,7 @@ module Businesses
   class GrossSale < ApplicationRecord
     belongs_to :business_activity
     validates :amount, presence: true, numericality: true
-    validates :amount, numericality: { greater_than_or_equal_to: Configurations::RetailerGrossSaleMinimum.last.amount}, if:  Proc.new{|u| u.retailer? }
+    validates :amount, numericality: { greater_than_or_equal_to: Configurations::RetailerGrossSaleMinimum.last.try(:amount)}, if:  Proc.new{|u| u.retailer? }
     # validate :minimum_amount_for_retailers
     delegate :retailer?, to: :business_activity
     after_commit :set_tax
