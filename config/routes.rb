@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :system_configurations, only: [:index]
   namespace :system_configurations do
     resources :retailer_gross_sale_minimums, only: [:new, :create]
+    resources :fees, only: [:index, :new, :create]
     resources :line_of_businesses do
       resources :gross_sale_taxes
       resources :business_taxes

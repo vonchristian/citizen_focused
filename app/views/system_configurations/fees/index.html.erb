@@ -1,0 +1,6 @@
+<%=link_to "New Fee", new_system_configurations_fee_path %>
+<% @fees.each do |fee| %>
+  <%=fee.name %>
+  <%=number_to_currency fee.amount %>
+  <%=fee.default %>
+<% end %>

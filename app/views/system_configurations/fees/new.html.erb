@@ -1,0 +1,7 @@
+<%=simple_form_for @fee, url: :system_configurations_fees do |f| %>
+  <%=f.error_notification %>
+  <%=f.input :name %>
+  <%=f.input :amount %>
+  <%=f.input :default %>
+  <%=f.submit %>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170118111635) do
+ActiveRecord::Schema.define(version: 20170119040536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,15 @@ ActiveRecord::Schema.define(version: 20170118111635) do
     t.datetime "updated_at",          null: false
     t.index ["business_id"], name: "index_business_activities_on_business_id", using: :btree
     t.index ["line_of_business_id"], name: "index_business_activities_on_line_of_business_id", using: :btree
+  end
+
+  create_table "business_fees", force: :cascade do |t|
+    t.integer  "fee_id"
+    t.integer  "business_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["business_id"], name: "index_business_fees_on_business_id", using: :btree
+    t.index ["fee_id"], name: "index_business_fees_on_fee_id", using: :btree
   end
 
   create_table "businesses", force: :cascade do |t|
@@ -160,6 +169,21 @@ ActiveRecord::Schema.define(version: 20170118111635) do
     t.index ["line_of_business_tax_config_id"], name: "index_line_of_businesses_on_line_of_business_tax_config_id", using: :btree
   end
 
+  create_table "police_clearance_issuances", force: :cascade do |t|
+    t.integer  "taxpayer_id"
+    t.integer  "police_clearance_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["police_clearance_id"], name: "index_police_clearance_issuances_on_police_clearance_id", using: :btree
+    t.index ["taxpayer_id"], name: "index_police_clearance_issuances_on_taxpayer_id", using: :btree
+  end
+
+  create_table "police_clearances", force: :cascade do |t|
+    t.string   "purpose"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "provinces", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -244,6 +268,8 @@ ActiveRecord::Schema.define(version: 20170118111635) do
 
   add_foreign_key "business_activities", "businesses"
   add_foreign_key "business_activities", "line_of_businesses"
+  add_foreign_key "business_fees", "businesses"
+  add_foreign_key "business_fees", "fees"
   add_foreign_key "businesses", "enterprise_scales"
   add_foreign_key "businesses", "taxpayers"
   add_foreign_key "businesses", "type_of_organizations"
@@ -251,5 +277,7 @@ ActiveRecord::Schema.define(version: 20170118111635) do
   add_foreign_key "gross_sales", "business_activities"
   add_foreign_key "line_of_businesses", "line_of_business_categories"
   add_foreign_key "line_of_businesses", "line_of_business_tax_configs"
+  add_foreign_key "police_clearance_issuances", "police_clearances"
+  add_foreign_key "police_clearance_issuances", "taxpayers"
   add_foreign_key "subscribers", "provinces"
 end

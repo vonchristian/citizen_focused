@@ -4,3 +4,8 @@
 <%=link_to "Add Gross Sale", new_business_activity_gross_sale_path(business_activity) %>
 </p>
 <% end %>
+
+<% @business.fees.each do |fee| %>
+  <%=fee.name %>
+  <%=fee.amount %>
+<% end %>
