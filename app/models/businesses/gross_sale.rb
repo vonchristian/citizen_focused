@@ -16,9 +16,9 @@ module Businesses
       if self.is_amount_based?
         Taxes::BusinessTax.set_tax(self)
       elsif self.is_percentage_based?
-        Taxes::PercentageTax.set_tax(self.line_of_business)
+        Taxes::PercentageTax.set_tax(self)
       elsif self..is_gross_sales_based?
-        Taxes::GrossSaleTax.set_tax(self.line_of_business)
+        Taxes::GrossSaleTax.set_tax(self)
       end
     end
 
