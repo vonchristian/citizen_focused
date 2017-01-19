@@ -4,9 +4,7 @@ class LineOfBusiness < ApplicationRecord
   belongs_to :line_of_business_tax_config
   has_many :gross_sale_taxes, as: :taxable, class_name: "Taxes::GrossSaleTax"
   has_many :percentage_taxes, as: :taxable, class_name: "Taxes::PercentageTax"
-  has_many :business_taxes, as: :taxable, class_name: "Taxes::BusinessTax"
-
-
+  has_many :business_taxes,   as: :taxable, class_name: "Taxes::BusinessTax"
 
   validates :name, presence: true, uniqueness: true
   validates :line_of_business_tax_config_id, presence: true

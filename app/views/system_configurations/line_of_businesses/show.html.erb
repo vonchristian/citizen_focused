@@ -7,5 +7,5 @@
 <%=link_to "New Tax (Percentage)", new_system_configurations_line_of_business_percentage_tax_path(@line_of_business) %>
 <% end %>
 <% if @line_of_business.is_amount_based? %>
-<%=@line_of_business.business_taxes.last.tax_amount %>
+<%=@line_of_business.business_taxes.last.try(:tax_amount) %>
 <% end %>
