@@ -2,6 +2,7 @@
   <%=f.error_notification %>
   <%=f.input :name %>
   <%=f.input :amount %>
+  <%=f.input :account_id, collection: Accounting::Revenue.all.map{ |a| [a.name, a.id] } %>
   <%=f.input :default %>
   <%=f.submit %>
 <% end %>

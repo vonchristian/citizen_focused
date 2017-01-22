@@ -17,7 +17,7 @@ module SystemConfigurations
 
     private
     def fee_params
-      params.require(:fee).permit(:name, :amount, :default)
+      params.require(:fee).permit(:name, :amount, :account_id, :default)
     end
   end
 end

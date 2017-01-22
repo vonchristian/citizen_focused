@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170119071907) do
+ActiveRecord::Schema.define(version: 20170121085622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20170119071907) do
     t.boolean  "contra",     default: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.string   "code"
     t.index ["type"], name: "index_accounts_on_type", using: :btree
   end
 
@@ -131,6 +132,8 @@ ActiveRecord::Schema.define(version: 20170119071907) do
     t.boolean  "default",      default: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.integer  "account_id"
+    t.index ["account_id"], name: "index_fees_on_account_id", using: :btree
     t.index ["feeable_id"], name: "index_fees_on_feeable_id", using: :btree
     t.index ["feeable_type"], name: "index_fees_on_feeable_type", using: :btree
     t.index ["type"], name: "index_fees_on_type", using: :btree
@@ -169,6 +172,12 @@ ActiveRecord::Schema.define(version: 20170119071907) do
     t.index ["line_of_business_tax_config_id"], name: "index_line_of_businesses_on_line_of_business_tax_config_id", using: :btree
   end
 
+  create_table "official_receipt_printings", force: :cascade do |t|
+    t.boolean  "enabled",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
   create_table "police_clearance_issuances", force: :cascade do |t|
     t.integer  "taxpayer_id"
     t.integer  "police_clearance_id"
@@ -188,6 +197,19 @@ ActiveRecord::Schema.define(version: 20170119071907) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "receipts", force: :cascade do |t|
+    t.integer  "receiptable_id"
+    t.string   "receiptable_type"
+    t.string   "type"
+    t.string   "number"
+    t.datetime "date"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["receiptable_id"], name: "index_receipts_on_receiptable_id", using: :btree
+    t.index ["receiptable_type"], name: "index_receipts_on_receiptable_type", using: :btree
+    t.index ["type"], name: "index_receipts_on_type", using: :btree
   end
 
   create_table "retailer_gross_sale_minimums", force: :cascade do |t|
@@ -291,6 +313,7 @@ ActiveRecord::Schema.define(version: 20170119071907) do
   add_foreign_key "businesses", "taxpayers"
   add_foreign_key "businesses", "type_of_organizations"
   add_foreign_key "capitals", "businesses"
+  add_foreign_key "fees", "accounts"
   add_foreign_key "gross_sales", "business_activities"
   add_foreign_key "line_of_businesses", "line_of_business_categories"
   add_foreign_key "line_of_businesses", "line_of_business_tax_configs"

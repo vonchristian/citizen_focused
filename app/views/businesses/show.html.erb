@@ -9,3 +9,6 @@
   <%=fee.name %>
   <%=fee.amount %>
 <% end %>
+
+<%= link_to "Assess", new_business_assessment_path(@business) %>
+<%= link_to "New Payment", new_business_payment_path(@business) %>

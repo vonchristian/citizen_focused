@@ -1,0 +1,15 @@
+<%=simple_form_for @entry, url: :business_payments do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :entry_date %>
+  <%=f.input :reference_number %>
+  <%= f.input :description %>
+  <%=f.simple_fields_for :debit_amounts do |d| %>
+  <%= d.input :amount %>
+  <%= d.input :account_id, collection: Accounting::Account.all.map{ |a| [a.name, a.id]} %>
+  <% end %>
+  <%=f.simple_fields_for :credit_amounts do |c| %>
+  <%=c.input :amount %>
+  <%=c.input :account_id, collection: Accounting::Account.all.map{ |a| [a.name, a.id]} %>
+  <% end %>
+  <%=f.submit %>
+<% end %>

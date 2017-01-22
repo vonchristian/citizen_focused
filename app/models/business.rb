@@ -17,6 +17,10 @@ class Business < ApplicationRecord
   validates :name, presence: true
   validates :employee_count, presence: true, numericality: { greater_than_or_equal_to: 1 }
   validates :asset_size, presence: true
+  def assessed?
+    entry = Accounting::Asset.find_by_name("Receivables from Taxpayers").debit_entries.where(commercial_document: self).last
+    entry.present? && entry.entry_date.between?(Time.zone.now.beginning_of_year, Time.zone.now.end_of_year)
+  end
 
   private
   def set_enterprise_scale
