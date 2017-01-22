@@ -10,4 +10,19 @@ RSpec.describe Fee, type: :model do
     it { is_expected.to validate_presence_of :name }
   end
 
+  it ".default" do
+    fee_1 = create(:fee, default: true)
+    fee_2 = create(:fee, default: false)
+
+    expect(Fee.default).to include(fee_1)
+    expect(Fee.default).to_not include(fee_2)
+  end
+
+  it ".not_default" do
+    fee_1 = create(:fee, default: false)
+    fee_2 = create(:fee, default: true)
+
+    expect(Fee.not_default).to include(fee_1)
+    expect(Fee.not_default).to_not include(fee_2)
+  end
 end

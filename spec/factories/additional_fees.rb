@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :business_fee do
-    fee nil
+  factory :additional_fee do
     business nil
+    fee nil
   end
 end

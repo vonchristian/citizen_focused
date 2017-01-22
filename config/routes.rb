@@ -7,7 +7,6 @@ Rails.application.routes.draw do
     resources :business_activities, only: [:new, :create], module: :businesses
     resources :assessments, only: [:new, :create], module: :businesses
     resources :payments, only: [:new, :create, :show], module: :businesses
-
   end
   resources :business_activities do
     resources :gross_sales, only: [:new, :create], module: :businesses

@@ -10,6 +10,7 @@ RSpec.describe Business, type: :model do
     it { is_expected.to have_many :gross_sales }
     it { is_expected.to have_many :business_activities }
     it { is_expected.to have_many :line_of_businesses }
+    it { is_expected.to have_many :additional_fees }
   end
 
   describe "validations" do

@@ -7,4 +7,14 @@ class Fee < ApplicationRecord
   def self.default
     all.where(default: true)
   end
+
+  def self.not_default
+    all.where(default: false)
+  end
+
+  def self.set_default_fees(feeable)
+    Fee.default.each do |fee|
+      Businesses::AdditionalFee.create(business: feeable, fee: fee)
+    end
+  end
 end

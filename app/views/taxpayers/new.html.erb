@@ -1,4 +1,4 @@
-<%=simple_form_for @taxpayer do |f| %>
+<%=simple_form_for @taxpayer, url: :taxpayer_registrations do |f| %>
   <%=f.error_notification %>
   <%= f.input :first_name %>
   <%= f.input :middle_name %>
@@ -8,4 +8,4 @@
   <%=f.input :mobile_number %>
   <%=f.input :telephone_number %>
   <%= f.submit %>
-<% end %>  
+<% end %>

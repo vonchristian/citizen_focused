@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122041520) do
+ActiveRecord::Schema.define(version: 20170122084429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20170122041520) do
     t.string   "code"
     t.boolean  "enabled",    default: true
     t.index ["type"], name: "index_accounts_on_type", using: :btree
+  end
+
+  create_table "additional_fees", force: :cascade do |t|
+    t.integer  "business_id"
+    t.integer  "fee_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["business_id"], name: "index_additional_fees_on_business_id", using: :btree
+    t.index ["fee_id"], name: "index_additional_fees_on_fee_id", using: :btree
   end
 
   create_table "addresses", force: :cascade do |t|
@@ -306,6 +315,8 @@ ActiveRecord::Schema.define(version: 20170122041520) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "additional_fees", "businesses"
+  add_foreign_key "additional_fees", "fees"
   add_foreign_key "business_activities", "businesses"
   add_foreign_key "business_activities", "line_of_businesses"
   add_foreign_key "business_fees", "businesses"

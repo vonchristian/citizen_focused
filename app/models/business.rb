@@ -8,12 +8,13 @@ class Business < ApplicationRecord
   has_many :business_activities, class_name: "Businesses::BusinessActivity"
   has_many :line_of_businesses, through: :business_activities
 
-  has_many :business_fees, class_name: "Businesses::BusinessFee"
-  has_many :fees, through: :business_fees
+  has_many :fees, through: :additional_fees
   has_many :taxes, through: :business_activities
+  has_many :additional_fees, class_name: "Businesses::AdditionalFee"
 
 
-  after_commit :set_enterprise_scale, :set_default_fees
+  after_commit :set_enterprise_scale
+  after_commit :set_default_fees
 
   validates :name, presence: true
   validates :employee_count, presence: true, numericality: { greater_than_or_equal_to: 1 }
@@ -28,6 +29,6 @@ class Business < ApplicationRecord
     EnterpriseScale.set_enterprise_scale(self)
   end
   def set_default_fees
-    Businesses::BusinessFee.set_default_fees(self)
+    Fee.set_default_fees(self)
   end
 end

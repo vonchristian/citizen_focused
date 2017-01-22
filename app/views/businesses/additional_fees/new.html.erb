@@ -1,0 +1,7 @@
+<% Fee.not_default.each do |fee| %>
+  <%=fee.name %>
+  <%=simple_form_for [@business, @fee], url: :business_additional_fees do |f| %>
+    <%= f.input :fee_id, input_html: { value: fee.id } %>
+    <%=f.submit "Add" %>
+  <% end %>
+<% end %>
