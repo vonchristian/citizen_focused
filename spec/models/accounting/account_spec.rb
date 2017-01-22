@@ -64,7 +64,7 @@ RSpec.describe Accounting::Account, type: :model do
         FactoryGirl.create(:entry, :credit_amounts => [ca5], :debit_amounts => [da5])
       }
 
-      it { is_expected.to == 0 }
+      it { should == 0 }
     end
   end
 

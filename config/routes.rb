@@ -24,4 +24,11 @@ Rails.application.routes.draw do
       resources :percentage_taxes
     end
   end
+
+  namespace :accounting do
+    resources :accounts, only: [:index, :new, :create] do
+    match "/enable" => "/accounting/accounts#enable", via: [:post], on: :member
+    match "/disable" => "/accounting/accounts#disable", via: [:post], on: :member
+  end
+  end
 end

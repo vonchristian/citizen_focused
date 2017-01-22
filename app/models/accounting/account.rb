@@ -32,7 +32,7 @@ module Accounting
   class Account < ActiveRecord::Base
     class_attribute :normal_credit_balance
 
-    has_many :amounts
+    has_many :amounts, class_name: "Accounting::Amount"
     has_many :credit_amounts, :extend => AmountsExtension, :class_name => 'Accounting::CreditAmount'
     has_many :debit_amounts, :extend => AmountsExtension, :class_name => 'Accounting::DebitAmount'
     has_many :entries, through: :amounts, source: :entry
@@ -40,9 +40,19 @@ module Accounting
     has_many :debit_entries, :through => :debit_amounts, :source => :entry, :class_name => 'Accounting::Entry'
 
     validates_presence_of :type
+    validates :name, presence: true, uniqueness: true
 
+    def self.types
+      ["Accounting::Asset",
+       "Accounting::Equity",
+       "Accounting::Liability",
+       "Accounting::Expense",
+       "Accounting::Revenue"]
+    end
 
-
+    def self.disabled
+      all.where(enabled: false)
+    end
     # The balance of the account. This instance method is intended for use only
     # on instances of account subclasses.
     #
@@ -128,6 +138,7 @@ module Accounting
     #   >> Accounting::Liability.balance
     #   => #<BigDecimal:1030fcc98,'0.82875E5',8(20)>
     #
+
     # @return [BigDecimal] The decimal value balance
     def self.balance(options={})
       if self.new.class == Accounting::Account
@@ -161,6 +172,17 @@ module Accounting
         raise(NoMethodError, "undefined method 'trial_balance'")
       end
     end
+    def disabled?
+      !enabled?
+    end
+    def disable!
+      self.enabled = false
+      self.save
+    end
 
+    def enable!
+      self.enabled = true
+      self.save
+    end
   end
 end

@@ -58,7 +58,7 @@ group :development, :test do
 end
 
 group :development do
-  # gem "bullet"
+  gem "bullet"
   gem 'meta_request'
   gem 'listen', '~> 3.0.5'
   gem 'spring'
