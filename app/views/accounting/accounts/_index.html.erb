@@ -7,12 +7,12 @@
     <td><%= account.credits_balance %> </td>
     <td>
       <% if account.enabled? %>
-      <%=link_to disable_accounting_account_path(account), method: :post do %>
-      <btn class="btn"><i class="fa fa-toggle-on fa-2x"></i></btn>
+      <%=link_to disable_accounting_account_path(account), method: :post, title: "Disable" do %>
+      <btn class="btn"  data-toggle="tooltip" title="Disable" data-placement="top"><i class="fa fa-toggle-on fa-2x"></i></btn>
       <% end %>
       <% elsif account.disabled? %>
-      <%=link_to enable_accounting_account_path(account), method: :post, title: 'Disable' do %>
-      <btn class="btn"  data-toggle="tooltip" title="Disable" data-placement="top"><i class="fa fa-toggle-off fa-2x text-muted"></i></btn>
+      <%=link_to enable_accounting_account_path(account), method: :post, title: 'Enable' do %>
+      <btn class="btn"  data-toggle="tooltip" title="Enable" data-placement="top"><i class="fa fa-toggle-off fa-2x text-muted"></i></btn>
       <% end %>
       <% end %>
   </tr>

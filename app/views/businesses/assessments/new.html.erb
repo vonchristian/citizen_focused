@@ -1,15 +1,63 @@
-<%=simple_form_for @entry, url: :business_assessments do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :entry_date %>
-  <%=f.input :reference_number %>
-  <%= f.input :description %>
-  <%=f.simple_fields_for :debit_amounts do |d| %>
-  <%= d.input :amount %>
-  <%= d.input :account_id, collection: Accounting::Account.all.map{ |a| [a.name, a.id]} %>
-  <% end %>
-  <%=f.simple_fields_for :credit_amounts do |c| %>
-  <%=c.input :amount %>
-  <%=c.input :account_id, collection: Accounting::Account.all.map{ |a| [a.name, a.id]} %>
-  <% end %>
-  <%=f.submit %>
-<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-solid">
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-6">
+            <%=simple_form_for @entry, url: :business_assessments do |f| %>
+              <%= f.error_notification %>
+              <%= f.input :entry_date %>
+              <%=f.input :reference_number %>
+              <%= f.input :description %>
+              <%=f.simple_fields_for :debit_amounts do |d| %>
+              <%= d.input :amount %>
+              <%= d.input :account_id, collection: Accounting::Account.all.map{ |a| [a.name, a.id]} %>
+              <% end %>
+              <%=f.simple_fields_for :credit_amounts do |c| %>
+              <%=c.input :amount %>
+              <%=c.input :account_id, collection: Accounting::Account.all.map{ |a| [a.name, a.id]} %>
+              <% end %>
+              <%=f.submit %>
+            <% end %>
+          </div>
+          <div class="col-md-5 col-md-offset-1">
+            <h4 class="text-muted"> Fees
+              <span class="pull-right">
+                <%=link_to "Add Additional Fee", new_business_additional_fee_path(@business), class: "btn btn-danger btn-xs btn-flat" %>
+              </span>
+            </h4>
+            <% @business.fees.each do |fee| %>
+              <div class="row">
+                <div class="col-md-5">
+                  &nbsp; &nbsp; <%=fee.name %>
+                </div>
+                <div class="col-md-5">
+                  <span class="pull-right"><%=number_to_currency fee.amount %></span>
+                </div>
+                <br><br>
+              </div>
+            <% end %>
+            <h4 class="text-muted"> Taxes </h4>
+            <% @business.taxes.each do |tax| %>
+              <div class="row">
+                <div class="col-md-5">
+                  &nbsp; &nbsp; <%=tax.name || tax.class %>
+                </div>
+                <div class="col-md-5">
+                  <span class="pull-right"><%=number_to_currency tax.tax_amount %></span>
+                </div>
+                <br><br>
+              </div>
+            <% end %>
+            <hr />
+            <b> Sub Total </b>
+            <br><br>
+            <p class="text-danger"> <b>Fines</b> </p>
+            <hr />
+            <b> Amount Due </b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

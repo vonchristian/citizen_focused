@@ -1,7 +1,7 @@
 module Accounting
   class AccountsController < ApplicationController
     def index
-      @accounts = Accounting::Account.joins([:amounts, :entries])
+      @accounts = Accounting::Account.all.order(:type)
     end
     def new
       @account = Accounting::Account.new

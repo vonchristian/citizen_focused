@@ -10,6 +10,7 @@ class Business < ApplicationRecord
 
   has_many :business_fees, class_name: "Businesses::BusinessFee"
   has_many :fees, through: :business_fees
+  has_many :taxes, through: :business_activities
 
 
   after_commit :set_enterprise_scale, :set_default_fees

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :taxpayers
 
   resources :businesses, except: [:new, :create] do
+    resources :additional_fees, only: [:new, :create], module: :businesses
     resources :business_activities, only: [:new, :create], module: :businesses
     resources :assessments, only: [:new, :create], module: :businesses
     resources :payments, only: [:new, :create, :show], module: :businesses
