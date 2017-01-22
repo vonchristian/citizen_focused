@@ -1,7 +1,6 @@
 module Receipts
   class OfficialReceiptPdf < Prawn::Document
     TABLE_WIDTH = [25, 60, 50]
-
     def initialize(receiptable, view_context)
       @receiptable = receiptable
       @view_context = view_context
@@ -14,16 +13,15 @@ module Receipts
       receiptable_details
       payment_details
       repeat :all do
-        #Create a bounding box and move it up 18 units from the bottom boundry of the page
-        bounding_box [bounds.left, bounds.bottom + 25], width: bounds.width do
-          barcode = Barby::Code39.new(@receiptable.number)
-          barcode.annotate_pdf(self, height: 20)
-          move_down 2
-          text "#{@receiptable.number}", size: 6, align: :center
-          text "MACHINE ACCREDITATION : ", size: 4, align: :center
-          move_down 2
-          text "<b>THIS SERVES AS AN OFFICIAL RECEIPT</b>", size: 6, align: :center, inline_format: true
-        end
+      #Create a bounding box and move it up 18 units from the bottom boundry of the page
+      bounding_box [bounds.left, bounds.bottom + 25], width: bounds.width do
+        barcode = Barby::Code39.new(@receiptable.number)
+        barcode.annotate_pdf(self, height: 20)
+        move_down 2
+        text "#{@receiptable.number}", size: 6, align: :center
+        text "MACHINE ACCREDITATION : ", size: 4, align: :center
+        move_down 2
+        text "<b>THIS SERVES AS AN OFFICIAL RECEIPT</b>", size: 6, align: :center, inline_format: true
       end
     end
 

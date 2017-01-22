@@ -17,7 +17,7 @@ module Businesses
       end
     end
 
-  
+
 
     private
     def entry_params
