@@ -1,4 +1,4 @@
-class TaxpayersController < ApplicationController
+class Bpls::TaxpayersController < ApplicationController
 
   before_action :set_taxpayer, only: [:show, :edit, :update] # probably want to keep using this
 
@@ -6,6 +6,19 @@ class TaxpayersController < ApplicationController
   # GET /taxpayers.json
   def index
     @taxpayers = Taxpayer.all
+  end
+
+  def new
+    @taxpayer = Taxpayer.new
+  end
+
+  def create
+    @taxpayer = Taxpayer.create(taxpayer_params)
+    if @taxpayer.save
+      redirect_to bpls_taxpayer_url(@taxpayer), notice: "registered successfully."
+    else
+      render :new
+    end
   end
 
   # # GET /taxpayers/1
@@ -41,7 +54,7 @@ class TaxpayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def taxpayer_params
-      params.require(:taxpayer).permit(:first_name, :middle_name, :last_name)
+      params.require(:taxpayer).permit(:first_name, :middle_name, :last_name, :mobile_number, :telephone_number, :sex, :date_of_birth, :email, :password, :password_confirmation)
     end
 
 end

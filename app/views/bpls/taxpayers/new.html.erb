@@ -1,4 +1,4 @@
-<%=simple_form_for @taxpayer, url: :taxpayer_registrations do |f| %>
+<%=simple_form_for @taxpayer, url: :bpls_taxpayers do |f| %>
   <%=f.error_notification %>
   <%= f.input :first_name %>
   <%= f.input :middle_name %>
@@ -7,5 +7,9 @@
   <%=f.input :date_of_birth %>
   <%=f.input :mobile_number %>
   <%=f.input :telephone_number %>
+  <%= f.input :email %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+  
   <%= f.submit %>
 <% end %>
